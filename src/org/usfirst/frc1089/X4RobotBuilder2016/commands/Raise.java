@@ -40,6 +40,9 @@ public class Raise extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+		// Add a delay for shooter movement (upward only)
+		setTimeout(m_Position > Robot.shooter.getPosition() ? Robot.shooter.RAISE_SHOOTER_CATCHUP_DELAY_SECS : 0.0);
+    	Robot.shooter.raise(m_Position);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -48,7 +51,7 @@ public class Raise extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	return isTimedOut();
     }
 
     // Called once after isFinished returns true

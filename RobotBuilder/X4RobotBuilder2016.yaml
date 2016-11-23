@@ -303,10 +303,12 @@ Children:
         name: Constants
         validators: null
         value:
-        - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: BALL_IN,
+        - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: ROLLER_IN,
           type: double, value: '-1.0'}
-        - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: BALL_OUT,
+        - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: ROLLER_OUT,
           type: double, value: '1.0'}
+        - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: ROLLER_OFF,
+          type: double, value: '0.0'}
     Base: Subsystem
     Name: Intake
   Properties: {}
@@ -696,11 +698,15 @@ Children:
         - !!robotbuilder.data.properties.ParameterSet
           name: IN
           parameters:
-          - {name: Speed, type: double, value: Intake.BALL_IN}
+          - {name: Speed, type: double, value: Intake.ROLLER_IN}
         - !!robotbuilder.data.properties.ParameterSet
           name: OUT
           parameters:
-          - {name: Speed, type: double, value: Intake.BALL_OUT}
+          - {name: Speed, type: double, value: Intake.ROLLER_OUT}
+        - !!robotbuilder.data.properties.ParameterSet
+          name: 'OFF'
+          parameters:
+          - {name: Speed, type: double, value: Intake.ROLLER_OFF}
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
