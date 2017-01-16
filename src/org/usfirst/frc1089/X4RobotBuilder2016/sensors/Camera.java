@@ -27,6 +27,7 @@ public class Camera {
 
 	private static final int MAX_NT_RETRY = 5;
 	private static final double NT_LISTENER_RETRY_DELAY = 0.05; // Time in seconds to wait before re-checking the NT listenner
+	public static final double AUTOROTATE_CAMERA_CATCHUP_DELAY_SECS = 0.500;
 	private Config config;
 	
 
@@ -123,7 +124,7 @@ public class Camera {
 		setRectangles(null, null, null, null, null);
 		
 		if (waitForNewInfo) {
-			Timer.delay(DriveTrain.AUTOROTATE_CAMERA_CATCHUP_DELAY_SECS);
+			Timer.delay(AUTOROTATE_CAMERA_CATCHUP_DELAY_SECS);
 		}
 
 		// We cannot get arrays atomically but at least we can make sure they
@@ -160,7 +161,7 @@ public class Camera {
 		setRectangles(null, null, null, null, null);
 		
 		// Wait up to AUTOROTATE_CAMERA_CATCHUP_DELAY_SECS for new data in the listener, or take what it has
-		while(waitForNewInfo && wait_secs < DriveTrain.AUTOROTATE_CAMERA_CATCHUP_DELAY_SECS && ntListener.getModificationTime().before(time_stamp)) {
+		while(waitForNewInfo && wait_secs < AUTOROTATE_CAMERA_CATCHUP_DELAY_SECS && ntListener.getModificationTime().before(time_stamp)) {
 			wait_secs += NT_LISTENER_RETRY_DELAY;
 			Timer.delay(NT_LISTENER_RETRY_DELAY);
 		}
